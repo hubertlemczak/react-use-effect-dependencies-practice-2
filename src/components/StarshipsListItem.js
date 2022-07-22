@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 function StarshipsListItem({ starship }) {
   const [pilots, setPilots] = useState([]);
   useEffect(() => {
-    console.log('starship', starship);
     if (starship?.pilots) {
       starship.pilots.forEach((pilot) => {
         fetch(pilot)
@@ -12,7 +11,6 @@ function StarshipsListItem({ starship }) {
             setPilots((currPilots) => [...currPilots, data.name])
           );
       });
-      console.log('pilots', pilots);
     }
   }, [starship]);
 
