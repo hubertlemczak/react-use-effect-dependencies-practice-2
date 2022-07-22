@@ -1,15 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-function PeopleListItem(props) {
-  const { person } = props;
-
+function PeopleListItem({ person }) {
   const [homeworld, setHomeworld] = useState('');
 
-  console.log("person", person)
+  useEffect(() => {
+    if (person?.homeworld) {
+      fetch(person.homeworld)
+        .then((res) => res.json())
+        .then((data) => {
+          setHomeworld(data.name);
+        });
+    }
+  }, [person]);
 
   return (
     <ul>
-      <li>{person.name} - Homeworld: {homeworld}</li>
+      <li>
+        {person.name} - Homeworld: {homeworld}
+      </li>
     </ul>
   );
 }
